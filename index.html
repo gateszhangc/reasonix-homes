@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- PRIMARY SEO -->
+  <title>Reasonix — DeepSeek-native AI coding agent for your terminal</title>
+  <meta name="description" content="Reasonix is a DeepSeek-native AI coding agent for your terminal. Engineered around prefix-cache stability — so token costs stay low across long sessions, and you can leave it running.">
+  <meta name="keywords" content="reasonix, deepseek, AI coding agent, terminal, prefix-cache, coding agent, CLI, TUI, deepseek-reasonix">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://reasonix.dev/">
+
+  <!-- OPEN GRAPH -->
+  <meta property="og:title" content="Reasonix — DeepSeek-native AI coding agent for your terminal">
+  <meta property="og:description" content="A DeepSeek-native AI coding agent for your terminal. Engineered around prefix-cache stability — so token costs stay low across long sessions, and you can leave it running.">
+  <meta property="og:url" content="https://reasonix.dev/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/og-image.png">
+
+  <!-- TWITTER CARD -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Reasonix — DeepSeek-native AI coding agent for your terminal">
+  <meta name="twitter:description" content="A DeepSeek-native AI coding agent for your terminal. Engineered around prefix-cache stability — so token costs stay low across long sessions, and you can leave it running.">
+
+  <!-- FAVICON -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <!-- FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- STYLES -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="logo">
+        <img src="assets/logo.svg" alt="Reasonix" width="180" height="44">
+      </a>
+      <div class="nav-links">
+        <a href="#install">Install</a>
+        <a href="#pillars">Architecture</a>
+        <a href="#features">Features</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://github.com/esengine/DeepSeek-Reasonix" target="_blank" rel="noopener" class="nav-gh">GitHub</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">v0.53 · May 2026</div>
+    <h1>
+      A DeepSeek-native<br>
+      <span class="highlight">coding agent</span>,<br>
+      for your terminal.
+    </h1>
+    <p class="hero-sub">
+      Reasonix talks straight to <code>api.deepseek.com</code>. The loop is append-only,
+      engineered around DeepSeek's byte-stable prefix cache — long sessions hold 90%+ cache hit
+      and input-token cost collapses to ~1/5. Terminal-first, leave it running.
+    </p>
+    <div class="hero-actions">
+      <a href="https://mirofish.my/" target="_blank" rel="noopener" class="btn btn-primary">Get started →</a>
+      <a href="https://github.com/esengine/DeepSeek-Reasonix" target="_blank" rel="noopener" class="btn btn-secondary">View the GitHub repo</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-value">94%</span>
+        <span class="stat-label">Cache Hit</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">2.5×</span>
+        <span class="stat-label">Cost Down</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">MIT</span>
+        <span class="stat-label">License</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">11k+</span>
+        <span class="stat-label">GitHub Stars</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="overview" id="overview">
+    <div class="section-label">Overview</div>
+    <h2>What makes Reasonix different from a normal coding agent</h2>
+    <div class="overview-grid">
+      <div class="overview-card">
+        <div class="card-icon">01</div>
+        <h3>A real feedback loop, not just automation</h3>
+        <p>The agent proposes a change, runs the experiment, reads the result, and keeps only the ideas that improve the metric.</p>
+      </div>
+      <div class="overview-card">
+        <div class="card-icon">02</div>
+        <h3>One editable file keeps the system legible</h3>
+        <p>Most research decisions stay inside <code>train.py</code>, which makes each iteration easy to inspect and compare.</p>
+      </div>
+      <div class="overview-card">
+        <div class="card-icon">03</div>
+        <h3>A fixed budget keeps comparisons honest</h3>
+        <p>Every run gets the same five-minute wall-clock window, so changes compete under the same constraint.</p>
+      </div>
+      <div class="overview-card">
+        <div class="card-icon">04</div>
+        <h3>Engineered around prefix-cache stability</h3>
+        <p>Cache stability isn't a feature you turn on; it's an invariant the loop is designed around. Every layer is tuned to the byte-stable prefix-cache mechanic.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTALL -->
+  <section class="install" id="install">
+    <div class="section-label">§01 · Install</div>
+    <h2>Two steps. No global install.</h2>
+    <p class="section-desc">Node ≥ 22 on macOS / Linux / Windows (PowerShell · Git Bash · Windows Terminal). The first launch walks you through pasting a DeepSeek API key.</p>
+    <div class="install-steps">
+      <div class="step">
+        <div class="step-number">01</div>
+        <div class="step-content">
+          <h3>Get a DeepSeek API key</h3>
+          <p>Head to the DeepSeek platform and create a key. Pay-as-you-go; cached tokens bill at 1/5 of the regular rate.</p>
+          <div class="step-meta">$0.07 /Mtok in · $0.014 /Mtok cached</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">02</div>
+        <div class="step-content">
+          <h3>Enter your project</h3>
+          <div class="code-block">
+            <code>$ cd /path/to/my-project</code>
+          </div>
+          <p>Tools sandboxed to launch directory.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">03</div>
+        <div class="step-content">
+          <h3>Launch the TUI</h3>
+          <div class="code-block">
+            <code>$ npx reasonix code</code>
+          </div>
+          <p>First-launch wizard wires up the key. Or run it without installing:</p>
+          <div class="code-block">
+            <code>$ cd my-project && npx reasonix code</code>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE PILLARS -->
+  <section class="pillars" id="pillars">
+    <div class="section-label">§02 · Three Pillars</div>
+    <h2>Why DeepSeek-native</h2>
+    <p class="section-desc">Reasonix only targets DeepSeek because the loop's invariants are designed against DeepSeek's cache mechanics. Same model, same API — what changes is the engineering stance of the loop.</p>
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="4" y="4" width="32" height="32" rx="8" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M12 18 L18 18 L18 28 L12 28 Z" fill="currentColor" opacity="0.5"/>
+            <path d="M20 14 L28 14 L28 30 L20 30 Z" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3>Cache-First Loop</h3>
+        <p>A byte-stable loop. DeepSeek's prefix cache fingerprints prompts from byte 0. The Reasonix loop is append-only — no reordering, no marker-based compaction — so the cached prefix survives every tool call.</p>
+        <div class="pillar-stat">94% cache hit · long sessions</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="4" y="4" width="32" height="32" rx="8" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M10 20 L16 14 L22 22 L30 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="16" cy="14" r="2" fill="currentColor"/>
+            <circle cx="22" cy="22" r="2" fill="currentColor"/>
+            <circle cx="30" cy="12" r="2" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3>R1 Thought Harvest</h3>
+        <p>Reasoning-chain harvest. When DeepSeek's R1 reasoning block contains escaped tool calls, Reasonix scavenges and re-routes them — no turn wasted.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="4" y="4" width="32" height="32" rx="8" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M12 28 L20 12 L28 28" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="20" cy="20" r="2" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3>Tool-Call Repair</h3>
+        <p>Schema-aware self-heal. When tool calls drift from the expected schema, Reasonix repairs them inline instead of discarding the turn — keeps the prefix intact.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="section-label">§03 · Features</div>
+    <h2>Engineering stance around the DeepSeek API.</h2>
+    <p class="section-desc">A dozen-odd tools combine into what looks like a simple CLI — but every layer beneath is working to keep cache hit, cost, and stability where they need to be.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-tag">F-01</span>
+        <h3>Terminal-native TUI</h3>
+        <p>Not another IDE plugin. <code>git diff</code> handles diffs, <code>ls</code> handles file trees — your terminal is the workspace. Built with TypeScript + Ink.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-tag">F-02</span>
+        <h3>V4 two-tier</h3>
+        <p>V4-Flash by default for cheap iteration; <code>/pro</code> lifts a single turn to V4-Pro; <code>/preset max</code> makes the whole session run on Pro.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-tag">F-03</span>
+        <h3>MCP first-class</h3>
+        <p>One line — <code>--mcp "name=cmd args"</code> — and an external server is wired in; its tools merge into the same registry under a prefix. Supports stdio, SSE, Streamable HTTP.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-tag">F-04</span>
+        <h3>Sandbox + plan gate</h3>
+        <p>Every built-in tool is sandboxed to the launch dir; <code>/plan</code> puts the session behind a read-only audit gate — no writes until the plan is approved.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-tag">F-05</span>
+        <h3>Composable skills</h3>
+        <p>Drop a Markdown file in <code>.reasonix/skills/*.md</code>; frontmatter supports <code>runAs: subagent</code> and <code>allowed-tools</code> for isolated execution.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-tag">F-06</span>
+        <h3>Replay & events</h3>
+        <p>Every event hits disk — replay any past session, run stats on token/cache/cost, audit your loop's behaviour. <code>reasonix replay / events / stats</code>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works">
+    <div class="section-label">How it works</div>
+    <h2>The loop stays small so each improvement is easy to judge</h2>
+    <p class="section-desc">One editable training file, one fixed wall-clock budget, and one metric keep the system narrow enough to inspect and strong enough to iterate.</p>
+    <div class="steps-flow">
+      <div class="flow-step">
+        <div class="flow-number">01</div>
+        <h3>Inspect the setup</h3>
+        <p>The agent reads the instructions, understands the experiment target, and decides what to change.</p>
+      </div>
+      <div class="flow-arrow">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M13 5l7 7-7 7"/>
+        </svg>
+      </div>
+      <div class="flow-step">
+        <div class="flow-number">02</div>
+        <h3>Edit one file</h3>
+        <p>Architecture, optimizer, hyperparameters, and training logic all live in the same training file.</p>
+      </div>
+      <div class="flow-arrow">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M13 5l7 7-7 7"/>
+        </svg>
+      </div>
+      <div class="flow-step">
+        <div class="flow-number">03</div>
+        <h3>Train for five minutes</h3>
+        <p>Every experiment gets the same wall-clock budget, which makes short-run results more directly comparable.</p>
+      </div>
+      <div class="flow-arrow">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M13 5l7 7-7 7"/>
+        </svg>
+      </div>
+      <div class="flow-step">
+        <div class="flow-number">04</div>
+        <h3>Keep or discard</h3>
+        <p>The run is scored on validation bits per byte. Better changes stay. Worse changes get thrown away.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section class="comparison">
+    <div class="section-label">How it compares</div>
+    <h2>Reasonix vs. other coding agents</h2>
+    <div class="comparison-table-wrapper">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="highlight-col">Reasonix</th>
+            <th>Claude Code</th>
+            <th>Cursor</th>
+            <th>Aider</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label">Backend</td>
+            <td class="highlight-col">DeepSeek</td>
+            <td>Anthropic</td>
+            <td>OpenAI / Anthropic</td>
+            <td>any (OpenRouter)</td>
+          </tr>
+          <tr>
+            <td class="row-label">License</td>
+            <td class="highlight-col">MIT</td>
+            <td>closed</td>
+            <td>closed</td>
+            <td>Apache 2</td>
+          </tr>
+          <tr>
+            <td class="row-label">Cost profile</td>
+            <td class="highlight-col">low per task</td>
+            <td>premium</td>
+            <td>subscription + use</td>
+            <td>varies</td>
+          </tr>
+          <tr>
+            <td class="row-label">DeepSeek prefix-cache</td>
+            <td class="highlight-col">engineered</td>
+            <td>not applicable</td>
+            <td>not applicable</td>
+            <td>incidental</td>
+          </tr>
+          <tr>
+            <td class="row-label">Embedded dashboard</td>
+            <td class="highlight-col">yes</td>
+            <td>—</td>
+            <td>n/a (IDE)</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td class="row-label">Plan mode · MCP · hooks · skills</td>
+            <td class="highlight-col">yes</td>
+            <td>yes</td>
+            <td>yes</td>
+            <td>partial</td>
+          </tr>
+          <tr>
+            <td class="row-label">Open community</td>
+            <td class="highlight-col">yes</td>
+            <td>—</td>
+            <td>—</td>
+            <td>yes</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="section-label">FAQ</div>
+    <h2>The fastest answers to the questions people ask first</h2>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>Why DeepSeek only? Can I swap to Claude / GPT?</summary>
+        <p>It's a design choice, not a limitation. DeepSeek's prefix cache fingerprints prompts from byte 0; the Reasonix loop is engineered around that invariant — long sessions hold ~94% cache hit. Coupling to one backend is the feature.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is it free?</summary>
+        <p>Reasonix itself is MIT-licensed and free. The DeepSeek API key is paid: V4-Flash is $0.07/Mtok uncached and $0.014/Mtok cached. In long sessions the bill typically lands at ~1/3 of comparable generic tooling.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Will there be an IDE plugin?</summary>
+        <p>No. Reasonix is terminal-first. <code>git diff</code> does diffs; <code>ls</code> does file trees. The desktop is a visual companion to the CLI, not a Cursor replacement.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I point it at a self-hosted DeepSeek endpoint?</summary>
+        <p>Yes. Since 0.30 we accept non-standard key prefixes for self-hosted DeepSeek endpoints. Just point <code>baseUrl</code> at your internal address — the loop, cache strategy, and tool protocol are unchanged.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How do I write my own skill?</summary>
+        <p>No remote registry — just write a file. Inside the TUI run <code>/skill new my-skill</code> to scaffold a project-local skill; add <code>--global</code> to put it under <code>~/.reasonix/skills</code> for reuse across projects.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What do you need to run it?</summary>
+        <p>Node ≥ 22 on macOS, Linux, or Windows. A DeepSeek API key. That's it. The desktop client bundles its own Node runtime.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- PRIMARY SOURCES -->
+  <section class="sources">
+    <div class="section-label">Primary sources</div>
+    <h2>Every claim on this page is grounded in the repo README or linked public discussion</h2>
+    <div class="sources-grid">
+      <a href="https://github.com/esengine/DeepSeek-Reasonix" target="_blank" rel="noopener" class="source-card">
+        <h3>GitHub Repo</h3>
+        <p>The source for the README, project structure, and quick-start commands.</p>
+        <span class="source-link">github.com/esengine/DeepSeek-Reasonix →</span>
+      </a>
+      <a href="https://esengine.github.io/DeepSeek-Reasonix/" target="_blank" rel="noopener" class="source-card">
+        <h3>Official Website</h3>
+        <p>Getting started, dashboard mockup, TUI mockup, and full documentation.</p>
+        <span class="source-link">esengine.github.io/DeepSeek-Reasonix →</span>
+      </a>
+      <a href="https://github.com/esengine/DeepSeek-Reasonix/blob/main/docs/ARCHITECTURE.md" target="_blank" rel="noopener" class="source-card">
+        <h3>Architecture Docs</h3>
+        <p>Three pillars: cache-first loop, tool-call repair, cost control.</p>
+        <span class="source-link">ARCHITECTURE.md →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <img src="assets/logo.svg" alt="Reasonix" width="140" height="34">
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/esengine/DeepSeek-Reasonix" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://esengine.github.io/DeepSeek-Reasonix/" target="_blank" rel="noopener">Documentation</a>
+        <a href="https://discord.gg/XF78rEME2D" target="_blank" rel="noopener">Discord</a>
+      </div>
+      <div class="footer-meta">
+        <span>MIT — see LICENSE</span>
+        <span>Built by the community at esengine/DeepSeek-Reasonix</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
