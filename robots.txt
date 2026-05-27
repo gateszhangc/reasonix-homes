@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://reasonix.homes/sitemap.xml
